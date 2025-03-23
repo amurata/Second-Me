@@ -1,7 +1,7 @@
 ![Second Me](https://github.com/mindverse/Second-Me/blob/master/images/cover.png)
 
 <div align="center">
-  
+
 [![Homepage](https://img.shields.io/badge/Second_Me-Homepage-blue?style=flat-square&logo=homebridge)](https://www.secondme.io/)
 [![Report](https://img.shields.io/badge/Paper-arXiv-red?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2503.08102)
 [![Discord](https://img.shields.io/badge/Chat-Discord-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/GpWHQNUwrg)
@@ -9,7 +9,6 @@
 [![Reddit](https://img.shields.io/badge/Join-Reddit-FF4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/SecondMeAI/)
 
 </div>
-
 
 ## Our Vision
 
@@ -30,7 +29,6 @@ Start training your Second Me today with your own memories! Using Hierarchical M
   <img src="https://github.com/user-attachments/assets/a84c6135-26dc-4413-82aa-f4a373c0ff89" width="94%" />
 </p>
 
-
 ### **Scale Your Intelligence** on the Second Me Network
 Launch your AI self from your laptop onto our decentralized network—anyone or any app can connect with your permission, sharing your context as your digital identity.
 
@@ -38,9 +36,8 @@ Launch your AI self from your laptop onto our decentralized network—anyone or 
   <img src="https://github.com/user-attachments/assets/9a74a3f4-d8fd-41c1-8f24-534ed94c842a" width="94%" />
 </p>
 
-
 ### Build Tomorrow’s Apps with Second Me
-**Roleplay**: Your AI self switches personas to represent you in different scenarios.  
+**Roleplay**: Your AI self switches personas to represent you in different scenarios.
 **AI Space**: Collaborate with other Second Mes to spark ideas or solve problems.
 
 <p align="center">
@@ -50,11 +47,8 @@ Launch your AI self from your laptop onto our decentralized network—anyone or 
 ### 100% **Privacy and Control**
 Unlike traditional centralized AI systems, Second Me ensures that your information and intelligence remains local and completely private.
 
-
-
 ## Getting started & staying tuned with us
 Star and join us, and you will receive all release notifications from GitHub without any delay!
-
 
  <p align="center">
   <img src="https://github.com/user-attachments/assets/5c14d956-f931-4c25-b0b3-3c2c96cd7581" width="94%" />
@@ -129,7 +123,6 @@ make help
 ## Tutorial
 - Feel free to follow [User tutorial](https://second-me.gitbook.io/a-new-ai-species-making-we-matter-again) to build your Second Me.
 
-
 ## Coming Soon 🚀
 
 The following features have been completed internally and are being gradually integrated into the open-source project. For detailed experimental results and technical specifications, please refer to our [Technical Report](https://arxiv.org/abs/2503.08102).
@@ -143,7 +136,6 @@ The following features have been completed internally and are being gradually in
 ### 🛠️ Product Features
 - [ ] **Natural Language Memory Summarization**: Intuitive memory organization in natural language format
 
-
 ## Contributing
 
 We welcome contributions to Second Me! Whether you're interested in fixing bugs, adding new features, or improving documentation, please check out our Contribution Guide. You can also support Second Me by sharing your experience with it in your community, at tech conferences, or on social media.
@@ -154,7 +146,6 @@ For more detailed information about development, please refer to our [Contributi
 
 We would like to express our gratitude to all the individuals who have contributed to Second Me! If you're interested in contributing to the future of intelligence uploading, whether through code, documentation, or ideas, please feel free to submit a pull request to our repository: [Second-Me](https://github.com/Mindverse/Second-Me).
 
-
 <a href="https://github.com/mindverse/Second-Me/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mindverse/Second-Me" />
 </a>
@@ -163,7 +154,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 ## Acknowledgements
 
-This work leverages the power of the open source community. 
+This work leverages the power of the open source community.
 
 For data synthesis, we utilized [GraphRAG](https://github.com/microsoft/graphrag) from Microsoft.
 
@@ -177,4 +168,3 @@ We also want to extend our sincere gratitude to all users who have experienced S
 
 Second Me is open source software licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for more details.
 
-[license]: ./LICENSE
