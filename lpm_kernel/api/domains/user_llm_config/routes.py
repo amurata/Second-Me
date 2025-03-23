@@ -15,16 +15,16 @@ OPENAI_ENDPOINT = "https://api.openai.com/v1"
 
 def validate_llm_config(data: Dict[Any, Any]) -> Dict[str, str]:
     """Validate LLM configuration based on provider type
-    
+
     Args:
         data: Configuration data
-        
+
     Returns:
         Dictionary with error messages if validation fails, empty dict if validation passes
     """
     errors = {}
     provider_type = data.get('provider_type')
-    
+
     if provider_type == 'openai':
         # For OpenAI, key is required
         if not data.get('key'):
@@ -40,7 +40,7 @@ def validate_llm_config(data: Dict[Any, Any]) -> Dict[str, str]:
                 errors[field] = f'{field} is required for custom provider'
     else:
         errors['provider_type'] = 'provider_type is required'
-        
+
     return errors
 
 def process_openai_config(data: Dict[Any, Any]) -> Dict[Any, Any]:
@@ -50,10 +50,10 @@ def process_openai_config(data: Dict[Any, Any]) -> Dict[Any, Any]:
         data['chat_api_key'] = data['key']
         data['chat_model_name'] ='gpt-4o-mini'
         data['embedding_api_key'] = data['key']
-        data['embedding_model_name'] = 'text-embedding-ada-002'
+        data['embedding_model_name'] = 'text-embedding-3-large'
         data['chat_endpoint'] = OPENAI_ENDPOINT
         data['embedding_endpoint'] = OPENAI_ENDPOINT
-            
+
     return data
 
 
@@ -90,25 +90,25 @@ def update_config():
         # Validate request data
         request_data = request.json
         validation_errors = validate_llm_config(request_data)
-        
+
         if validation_errors:
             error_message = "; ".join([f"{k}: {v}" for k, v in validation_errors.items()])
             return jsonify(
                 APIResponse.error(f"Validation failed: {error_message}")
             ), HTTPStatus.BAD_REQUEST
-        
+
         # Process request data
         processed_data = process_openai_config(request_data)
         data = UpdateUserLLMConfigDTO(**processed_data)
         config = user_llm_config_service.update_config(1, data)  # Default configuration ID is 1
-        
+
         return jsonify(
             APIResponse.success(
                 data=config.dict(),
                 message="Configuration updated successfully"
             )
         ), HTTPStatus.OK
-    
+
     except Exception as e:
         logger.error(f"Failed to update configuration: {str(e)}", exc_info=True)
         return jsonify(
@@ -126,14 +126,14 @@ def delete_key():
             return jsonify(
                 APIResponse.error("No LLM configuration found")
             ), HTTPStatus.NOT_FOUND
-            
+
         return jsonify(
             APIResponse.success(
                 data=config.dict(),
                 message="API key deleted successfully"
             )
         ), HTTPStatus.OK
-    
+
     except Exception as e:
         logger.error(f"Failed to delete API key: {str(e)}", exc_info=True)
         return jsonify(
