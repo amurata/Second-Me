@@ -9,7 +9,7 @@
 #   make restart-force - Force restart and reset data
 #   make status       - Show status of all services
 
-.PHONY: install test format lint all setup start stop restart restart-backend restart-force help check-conda check-env
+.PHONY: install test format lint all setup start stop restart restart-backend restart-force help check-conda check-env fish-setup fish-start fish-stop fish-restart fish-restart-backend fish-restart-force fish-status
 
 # Show help message
 help:
@@ -91,3 +91,25 @@ lint: check-conda
 	poetry run ruff check lpm_kernel/
 
 all: check-conda format lint test
+
+# Fish shell wrapper commands
+fish-setup:
+	fish ./fish-wrapper.fish setup
+
+fish-start:
+	fish ./fish-wrapper.fish start
+
+fish-stop:
+	fish ./fish-wrapper.fish stop
+
+fish-restart:
+	fish ./fish-wrapper.fish restart
+
+fish-restart-backend:
+	fish ./fish-wrapper.fish restart-backend
+
+fish-restart-force:
+	fish ./fish-wrapper.fish restart-force
+
+fish-status:
+	fish ./fish-wrapper.fish status
