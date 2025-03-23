@@ -203,7 +203,7 @@ def chunk_filter(
     return spacer.join(filter(chunks, separator, filtered_chunks_n))
 
 
-def get_safe_content_turncate(content, model_name="gpt-3.5-turbo", max_tokens=3300):
+def get_safe_content_turncate(content, model_name="gpt-4o-mini", max_tokens=8000):
     enc = tiktoken.encoding_for_model(model_name)
     logging.warning(
         "get_safe_content_turncate(): current model maximum input length is %s, current input length is %s",
