@@ -33,11 +33,11 @@ def select_language_desc(
 
 
 def cal_upperbound(
-    model_limit: int = 4096,
-    generage_limit: int = 512,
-    tolerance: int = 500,
+    model_limit: int = 16000,
+    generage_limit: int = 1024,
+    tolerance: int = 1000,
     raw: str = "",
-    model_name: str = "gpt-3.5-turbo",
+    model_name: str = "gpt-4o-mini",
 ) -> int:
     """
     :param model_limit: Maximum token count for the underlying model call
@@ -50,11 +50,11 @@ def cal_upperbound(
             enc = tiktoken.encoding_for_model(model_name)
             logging.info(f"Successfully initialized tokenizer for model: {model_name}")
         else:
-            enc = tiktoken.get_encoding("cl100k_base")
-            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: cl100k_base")
+            enc = tiktoken.get_encoding("o200k_base")
+            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: o200k_base")
     else:
-        enc = tiktoken.get_encoding("cl100k_base")
-        logging.info(f"No model specified, using default tokenizer: cl100k_base")
+        enc = tiktoken.get_encoding("o200k_base")
+        logging.info(f"No model specified, using default tokenizer: o200k_base")
     raw_token = len(enc.encode(raw))
     upper_bound = model_limit - raw_token - tolerance - generage_limit
     if upper_bound < 0:
@@ -108,7 +108,7 @@ class TokenTextSplitter(TextSplitter):
 
     def __init__(
         self,
-        encoding_name: str = "cl100k_base",
+        encoding_name: str = "o200k_base",
         model_name: Optional[str] = None,
         allowed_special: Union[Literal["all"], AbstractSet[str]] = ALLOW_SPECIAL_TOKEN,
         disallowed_special: Union[Literal["all"], Collection[str]] = "all",
@@ -219,17 +219,17 @@ def chunk_filter(
     return spacer.join(filter(chunks, separator, filtered_chunks_n))
 
 
-def get_safe_content_turncate(content, model_name="gpt-3.5-turbo", max_tokens=3300):
+def get_safe_content_turncate(content, model_name="gpt-4o-mini", max_tokens=16000):
     if model_name is not None:
         if model_name in tiktoken.model.MODEL_TO_ENCODING:
             enc = tiktoken.encoding_for_model(model_name)
             logging.info(f"Successfully initialized tokenizer for model: {model_name}")
         else:
-            enc = tiktoken.get_encoding("cl100k_base")
-            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: cl100k_base")
+            enc = tiktoken.get_encoding("o200k_base")
+            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: o200k_base")
     else:
-        enc = tiktoken.get_encoding("cl100k_base")
-        logging.info(f"No model specified, using default tokenizer: cl100k_base")
+        enc = tiktoken.get_encoding("o200k_base")
+        logging.info(f"No model specified, using default tokenizer: o200k_base")
     logging.warning(
         "get_safe_content_turncate(): current model maximum input length is %s, current input length is %s",
         max_tokens,
@@ -338,8 +338,8 @@ class TokenParagraphSplitter(TextSplitter):
         ("[", "]"),
         ("{", "}"),
         ("<", ">"),
-        ("“", "”"),
-        ("‘", "’"),
+        (""", """),
+        ("'", "'"),
         ("《", "》"),
         ("【", "】"),
     ]
@@ -347,7 +347,7 @@ class TokenParagraphSplitter(TextSplitter):
 
     def __init__(
         self,
-        encoding_name: str = "cl100k_base",
+        encoding_name: str = "o200k_base",
         allowed_special: Union[Literal["all"], AbstractSet[str]] = ALLOW_SPECIAL_TOKEN,
         disallowed_special: Union[Literal["all"], Collection[str]] = "all",
         **kwargs: Any,
