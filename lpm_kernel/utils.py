@@ -32,11 +32,11 @@ def select_language_desc(
 
 
 def cal_upperbound(
-    model_limit: int = 4096,
-    generage_limit: int = 512,
-    tolerance: int = 500,
+    model_limit: int = 16000,
+    generage_limit: int = 1024,
+    tolerance: int = 1000,
     raw: str = "",
-    model_name: str = "gpt-3.5-turbo",
+    model_name: str = "gpt-4o-mini",
 ) -> int:
     """
     :param model_limit: Maximum token count for the underlying model call
@@ -203,7 +203,7 @@ def chunk_filter(
     return spacer.join(filter(chunks, separator, filtered_chunks_n))
 
 
-def get_safe_content_turncate(content, model_name="gpt-4o-mini", max_tokens=8000):
+def get_safe_content_turncate(content, model_name="gpt-4o-mini", max_tokens=16000):
     enc = tiktoken.encoding_for_model(model_name)
     logging.warning(
         "get_safe_content_turncate(): current model maximum input length is %s, current input length is %s",
