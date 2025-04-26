@@ -1,4 +1,4 @@
-.PHONY: install test format lint all setup start stop restart restart-backend restart-force help docker-build docker-up docker-down docker-build-backend docker-build-frontend docker-restart-backend docker-restart-frontend docker-restart-all
+.PHONY: install test format lint all setup start stop restart restart-backend restart-force help docker-build docker-up docker-down docker-build-backend docker-build-frontend docker-restart-backend docker-restart-frontend docker-restart-all fish-setup fish-start fish-stop fish-restart fish-restart-backend fish-restart-force fish-status
 
 # Detect operating system and set environment
 ifeq ($(OS),Windows_NT)
@@ -201,3 +201,25 @@ lint:
 	poetry run ruff check lpm_kernel/
 
 all: format lint test
+
+# Fish shell wrapper commands
+fish-setup:
+	fish ./fish-wrapper.fish setup
+
+fish-start:
+	fish ./fish-wrapper.fish start
+
+fish-stop:
+	fish ./fish-wrapper.fish stop
+
+fish-restart:
+	fish ./fish-wrapper.fish restart
+
+fish-restart-backend:
+	fish ./fish-wrapper.fish restart-backend
+
+fish-restart-force:
+	fish ./fish-wrapper.fish restart-force
+
+fish-status:
+	fish ./fish-wrapper.fish status

@@ -50,7 +50,7 @@ def process_openai_config(data: Dict[Any, Any]) -> Dict[Any, Any]:
         data['chat_api_key'] = data['key']
         data['chat_model_name'] ='gpt-4o-mini'
         data['embedding_api_key'] = data['key']
-        data['embedding_model_name'] = 'text-embedding-ada-002'
+        data['embedding_model_name'] = 'text-embedding-3-large'
         data['chat_endpoint'] = OPENAI_ENDPOINT
         data['embedding_endpoint'] = OPENAI_ENDPOINT
             
