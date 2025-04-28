@@ -21,6 +21,11 @@ def openai_strategy(user_llm_config: Optional[UserLLMConfigDTO], chunked_texts):
         response = requests.post(
             f"{user_llm_config.embedding_endpoint}/embeddings", headers=headers, json=data
         )
+        
+        # 400エラーの詳細をログに出力
+        if response.status_code != 200:
+            logger.error(f"API Error Response: {response.status_code} - {response.text}")
+            
         response.raise_for_status()
         result = response.json()
 
@@ -31,5 +36,6 @@ def openai_strategy(user_llm_config: Optional[UserLLMConfigDTO], chunked_texts):
         return embeddings_array
 
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Failed to get embeddings: {str(e)}", exc_info=True)
+        logger.error(f"Failed to get embeddings: {str(e)}", exc_info=True)
+        raise Exception(f"Failed to get embeddings: {str(e)}")
 
