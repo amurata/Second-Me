@@ -50,11 +50,11 @@ def cal_upperbound(
             enc = tiktoken.encoding_for_model(model_name)
             logging.info(f"Successfully initialized tokenizer for model: {model_name}")
         else:
-            enc = tiktoken.get_encoding("o200k_base")
-            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: o200k_base")
+            enc = tiktoken.get_encoding("cl100k_base")
+            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: cl100k_base")
     else:
-        enc = tiktoken.get_encoding("o200k_base")
-        logging.info(f"No model specified, using default tokenizer: o200k_base")
+        enc = tiktoken.get_encoding("cl100k_base")
+        logging.info(f"No model specified, using default tokenizer: cl100k_base")
     raw_token = len(enc.encode(raw))
     upper_bound = model_limit - raw_token - tolerance - generage_limit
     if upper_bound < 0:
@@ -108,7 +108,7 @@ class TokenTextSplitter(TextSplitter):
 
     def __init__(
         self,
-        encoding_name: str = "o200k_base",
+        encoding_name: str = "cl100k_base",
         model_name: Optional[str] = None,
         allowed_special: Union[Literal["all"], AbstractSet[str]] = ALLOW_SPECIAL_TOKEN,
         disallowed_special: Union[Literal["all"], Collection[str]] = "all",
@@ -165,7 +165,7 @@ class TokenTextSplitter(TextSplitter):
 
     def _cut_meaningless_head_tail(self, text: str) -> str:
         # Only split when there are multiple newlines, as parsing of PDF/Word often contains false newlines
-        sentences = re.split("\. |! |\? |。|！|？|\n+ *\n+", text)
+        sentences = re.split(r"\. |! |\? |。|！|？|\n+ *\n+", text)
         if len(sentences) < 2:
             return text
         head = sentences[0]
@@ -225,11 +225,11 @@ def get_safe_content_turncate(content, model_name="gpt-4o-mini", max_tokens=1600
             enc = tiktoken.encoding_for_model(model_name)
             logging.info(f"Successfully initialized tokenizer for model: {model_name}")
         else:
-            enc = tiktoken.get_encoding("o200k_base")
-            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: o200k_base")
+            enc = tiktoken.get_encoding("cl100k_base")
+            logging.warning(f"Model '{model_name}' doesn't have a corresponding tokenizer, falling back to default: cl100k_base")
     else:
-        enc = tiktoken.get_encoding("o200k_base")
-        logging.info(f"No model specified, using default tokenizer: o200k_base")
+        enc = tiktoken.get_encoding("cl100k_base")
+        logging.info(f"No model specified, using default tokenizer: cl100k_base")
     logging.warning(
         "get_safe_content_turncate(): current model maximum input length is %s, current input length is %s",
         max_tokens,
@@ -347,7 +347,7 @@ class TokenParagraphSplitter(TextSplitter):
 
     def __init__(
         self,
-        encoding_name: str = "o200k_base",
+        encoding_name: str = "cl100k_base",
         allowed_special: Union[Literal["all"], AbstractSet[str]] = ALLOW_SPECIAL_TOKEN,
         disallowed_special: Union[Literal["all"], Collection[str]] = "all",
         **kwargs: Any,
