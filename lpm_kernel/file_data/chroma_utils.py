@@ -56,9 +56,9 @@ def detect_embedding_model_dimension(model_name: str) -> Optional[int]:
         if model in model_name:
             return dimension
     
-    # Default to OpenAI dimension if unknown
-    logger.warning(f"Unknown embedding model: {model_name}, defaulting to 1536 dimensions")
-    return 1536
+    # Default to text-embedding-3-large dimension if unknown
+    logger.warning(f"Unknown embedding model: {model_name}, defaulting to 3072 dimensions (text-embedding-3-large)")
+    return 3072
 
 
 def reinitialize_chroma_collections(dimension: int = 1536) -> bool:

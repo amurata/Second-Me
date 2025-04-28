@@ -26,15 +26,23 @@ class EmbeddingService:
             
             if user_llm_config and user_llm_config.embedding_model_name:
                 # Detect dimension based on model name
-                self.dimension = detect_embedding_model_dimension(user_llm_config.embedding_model_name)
-                logger.info(f"Detected embedding dimension: {self.dimension} for model: {user_llm_config.embedding_model_name}")
+                model_name = user_llm_config.embedding_model_name
+                
+                # 強制的にtext-embedding-3-largeを使用する場合は次元数を3072に設定
+                if 'text-embedding-3-large' in model_name:
+                    logger.info(f"Using text-embedding-3-large, forcing dimension to 3072")
+                    self.dimension = 3072
+                else:
+                    self.dimension = detect_embedding_model_dimension(model_name)
+                    
+                logger.info(f"Detected embedding dimension: {self.dimension} for model: {model_name}")
             else:
-                # Default to OpenAI dimension if no config found
-                self.dimension = 1536
+                # Default to larger dimension if no config found - safer for text-embedding-3-large
+                self.dimension = 3072
                 logger.info(f"No embedding model configured, using default dimension: {self.dimension}")
         except Exception as e:
-            # Default to OpenAI dimension if error occurs
-            self.dimension = 1536
+            # Default to larger dimension if error occurs
+            self.dimension = 3072
             logger.error(f"Error detecting embedding dimension, using default: {self.dimension}. Error: {str(e)}", exc_info=True)
 
         # Check for dimension mismatches in all collections first
