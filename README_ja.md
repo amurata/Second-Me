@@ -206,6 +206,21 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 Second MeはApache License 2.0の下でライセンスされたオープンソースソフトウェアです。詳細については、[LICENSE](LICENSE)ファイルを参照してください。
 
+## 日本語テキスト処理のための設定
+
+日本語テキストを処理する場合、OpenAIのトークナイザーの特性により、以下の設定変更が推奨されます：
+
+```env
+# 日本語向けチャンクサイズ設定
+DOCUMENT_CHUNK_SIZE=5000
+DOCUMENT_CHUNK_OVERLAP=250
+
+# エンベディング最大テキスト長（日本語向け）
+EMBEDDING_MAX_TEXT_LENGTH=5000
+```
+
+これらの設定は`.env`ファイルに追加することで、日本語テキストのトークン数超過エラーを防ぐことができます。日本語は英語と比較して同じ内容でもトークン数が約1.5〜2倍必要になるため、チャンクサイズを小さくすることが重要です。
+
 [license]: ./LICENSE
 
 ## Star History

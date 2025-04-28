@@ -16,9 +16,9 @@
 
 Companies like OpenAI built "Super AI" that threatens human independence. We crave individuality: AI that amplifies, not erases, **YOU**.
 
-We’re challenging that with "**Second Me**": an open-source prototype where you craft your own **AI self**—a new AI species that preserves you, delivers your context, and defends your interests.
+We're challenging that with "**Second Me**": an open-source prototype where you craft your own **AI self**—a new AI species that preserves you, delivers your context, and defends your interests.
 
-It’s **locally trained and hosted**—your data, your control—yet **globally connected**, scaling your intelligence across an AI network. Beyond that, it’s your AI identity interface—a bold standard linking your AI to the world, sparks collaboration among AI selves, and builds tomorrow’s truly native AI apps.
+It's **locally trained and hosted**—your data, your control—yet **globally connected**, scaling your intelligence across an AI network. Beyond that, it's your AI identity interface—a bold standard linking your AI to the world, sparks collaboration among AI selves, and builds tomorrow's truly native AI apps.
 
 Tech enthusiasts, AI pros, domain experts, Join us! Second Me is your launchpad to extend your mind into the digital horizon.
 
@@ -40,7 +40,7 @@ Launch your AI self from your laptop onto our decentralized network—anyone or 
 </p>
 
 
-### Build Tomorrow’s Apps with Second Me
+### Build Tomorrow's Apps with Second Me
 **Roleplay**: Your AI self switches personas to represent you in different scenarios.  
 **AI Space**: Collaborate with other Second Mes to spark ideas or solve problems.
 
@@ -212,7 +212,22 @@ We also want to extend our sincere gratitude to all users who have experienced S
 
 ## License
 
-Second Me is open source software licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for more details.
+Second Me is open-source software licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+
+## Settings for Japanese Text Processing
+
+When processing Japanese text, the following configuration changes are recommended due to the characteristics of OpenAI's tokenizer:
+
+```env
+# Chunk size settings for Japanese
+DOCUMENT_CHUNK_SIZE=5000
+DOCUMENT_CHUNK_OVERLAP=250
+
+# Maximum text length for embedding (Japanese)
+EMBEDDING_MAX_TEXT_LENGTH=5000
+```
+
+Adding these settings to your `.env` file helps prevent token count overflow errors when processing Japanese text. Japanese requires approximately 1.5-2 times more tokens than English for the same content, so reducing chunk size is important.
 
 [license]: ./LICENSE
 
