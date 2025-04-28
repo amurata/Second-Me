@@ -9,6 +9,7 @@ __pycache__
 poetry.lock
 .hf_cache/
 .poetry-venv/
+.env
 
 llama.cpp
 *.ipynb
